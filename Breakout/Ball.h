@@ -15,13 +15,7 @@ public:
     void setVelocity(float coeff, float duration);
     void setFireBall(float duration);
     void randomSpawn(sf::CircleShape &_sprite);
-
-    //a vector of pairs that contains ball spawn details (x pos, direction)
-    std::vector<std::pair<float, float>> spawnVec = {
-        {0, 1},
-        {500, 0},
-        {1000, 1}
-    };
+    sf::Vector2u windowSize;
 
 private:
     sf::CircleShape _sprite;

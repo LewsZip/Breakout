@@ -17,6 +17,7 @@ Ball::~Ball()
 
 void Ball::update(float dt)
 {
+    
     // check for powerup, tick down or correct
     if (_timeWithPowerupEffect > 0.f)
     {
@@ -63,8 +64,8 @@ void Ball::update(float dt)
     // lose life bounce
     if (position.y > windowDimensions.y)
     {
-        _sprite.setPosition(0, 300);
-        _direction = { 1, 1 };
+        _sprite.setPosition(500, 300);
+        _direction = { 0, 1 };
         _gameManager->loseLife();
     }
 
@@ -117,6 +118,14 @@ void Ball::setFireBall(float duration)
 }
 
 void Ball::randomSpawn(sf::CircleShape &_sprite) {
+
+    //a vector of pairs that contains ball spawn details (x pos, direction)
+    std::vector<std::pair<float, float>> spawnVec = {
+        {100, 1}, //left
+        {490, 0}, //middle
+        {880, -1} //right
+    };
+
     srand(time(0)); //setting seed value to get random vals each time game is run
     int randSpawn = (rand() % 3); //getting a random value between 0 and 3
 

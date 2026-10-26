@@ -24,4 +24,5 @@ private:
     float _width = PADDLE_WIDTH;
     bool _isAlive;
     float _timeInNewSize = 0.0f;
+    float _currentSpeed = PADDLE_SPEED;
 };

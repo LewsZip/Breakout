@@ -54,6 +54,7 @@ void GameManager::update(float dt)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
             _pause = false;
             _lives = 3;
+            _currentLevel = 0;
             _masterText.setString("");
             _retryText.setString("");
             initialize();
@@ -64,6 +65,7 @@ void GameManager::update(float dt)
     if (_levelComplete)
     {
         _masterText.setString("Level completed.");
+        levelComplete();
         return;
     }
 
@@ -129,12 +131,12 @@ void GameManager::render()
     _powerupManager->render();
     _window->draw(_masterText);
     _window->draw(_retryText);
+    _window->draw(_levelText);
     _ui->render();
 }
 
 void GameManager::levelComplete()
 {
-    _levelComplete = true;
     _currentLevel += 1;
     initialize();
 }

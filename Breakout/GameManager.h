@@ -66,9 +66,9 @@ private:
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn
 
     //(int rows, int cols, float brickWidth, float brickHeight, float spacing, int level); 5, 10, 80.0f, 30.0f, 5.0f
-    float _brickRows[3] = {1, 4, 8};
-    float _brickCols[3] = {1, 8, 16};
-    float _brickWidth[3] = {100.f, 40.f, 40.f};
-    float _brickHeight[3] = {150.f,15.f,15.f};
-    float _brickSpacing[3] = { 5.0f,5.0f,5.0f };
+    float _brickRows[3] = {4, 4, 8};
+    float _brickCols[3] = {4, 8, 16};
+    float _brickWidth[3] = {50.f, 40.f, 40.f};
+    float _brickHeight[3] = {50.f,15.f,15.f};
+    float _brickSpacing[3] = { 30.0f,5.0f,5.0f };
 };

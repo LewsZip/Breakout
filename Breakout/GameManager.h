@@ -9,6 +9,7 @@
 #include "UI.h"
 
 #include "Camera.h"
+#include "Parry.h"
 #include <utility>
 #include <ctime>
 #include <iostream>
@@ -25,6 +26,7 @@ public:
     void powerupEffect(POWERUPS pu, float t);
 
     Paddle* getPaddle() const;
+    Parry* getParry() const;
     BrickManager* getBrickManager() const;
     PowerupManager* getPowerupManager() const;
     sf::RenderWindow* getWindow() const;
@@ -61,6 +63,7 @@ private:
     MessagingSystem* _messagingSystem;
     UI* _ui;
     Camera* _cam;
+    Parry* _parry;
 
     static constexpr float PAUSE_TIME_BUFFER = 0.5f;
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn

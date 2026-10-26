@@ -81,6 +81,14 @@ void Ball::update(float dt)
         _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
     }
 
+    // collision with parry window
+    if (_sprite.getGlobalBounds().intersects(_gameManager->getParry()->getBounds())) 
+    {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            _direction.y *= -1; // Bounce vertically
+        }
+    }
+
     // collision with bricks
     int collisionResponse = _gameManager->getBrickManager()->checkCollision(_sprite, _direction);
     if (_isFireBall) return; // no collisisons when in fireBall mode.

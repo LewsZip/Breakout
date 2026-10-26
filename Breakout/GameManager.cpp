@@ -6,13 +6,18 @@
 GameManager::GameManager(sf::RenderWindow* window)
     : _window(window), _paddle(nullptr), _ball(nullptr), _brickManager(nullptr), _powerupManager(nullptr),
     _messagingSystem(nullptr), _ui(nullptr), _pause(false), _time(0.f), _lives(3), _pauseHold(0.f), _levelComplete(false),
-    _powerupInEffect({ none,0.f }), _timeLastPowerupSpawned(0.f)
+    _powerupInEffect({ none,0.f }), _timeLastPowerupSpawned(0.f), _cam(nullptr)
 {
     _font.loadFromFile("font/montS.ttf");
     _masterText.setFont(_font);
     _masterText.setPosition(50, 400);
     _masterText.setCharacterSize(48);
     _masterText.setFillColor(sf::Color::Yellow);
+
+    _retryText.setFont(_font);
+    _retryText.setPosition(50, 500);
+    _retryText.setCharacterSize(48);
+    _retryText.setFillColor(sf::Color::Yellow);
 }
 
 void GameManager::initialize()
@@ -23,12 +28,15 @@ void GameManager::initialize()
     _ball = new Ball(_window, 400.0f, this); 
     _powerupManager = new PowerupManager(_window, _paddle, _ball);
     _ui = new UI(_window, _lives, this);
+    _cam = new Camera(_window);
 
     // Create bricks
     _brickManager->createBricks(5, 10, 80.0f, 30.0f, 5.0f);
+
+    
 }
 
-void GameManager::update(float dt, sf::Vector2u windowSize)
+void GameManager::update(float dt)
 {
     _powerupInEffect = _powerupManager->getPowerupInEffect();
     _ui->updatePowerupText(_powerupInEffect);
@@ -38,6 +46,16 @@ void GameManager::update(float dt, sf::Vector2u windowSize)
     if (_lives <= 0)
     {
         _masterText.setString("Game over.");
+        _retryText.setString("Press 'R' to restart.");
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+            _pause = false;
+            _lives = 3;
+            _masterText.setString("");
+            _retryText.setString("");
+            initialize();
+        }
+
         return;
     }
     if (_levelComplete)
@@ -45,6 +63,7 @@ void GameManager::update(float dt, sf::Vector2u windowSize)
         _masterText.setString("Level completed.");
         return;
     }
+
     // pause and pause handling
     if (_pauseHold > 0.f) _pauseHold -= dt;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
@@ -59,6 +78,7 @@ void GameManager::update(float dt, sf::Vector2u windowSize)
         {
             _pause = false;
             _masterText.setString("");
+            _retryText.setString("");
             _pauseHold = PAUSE_TIME_BUFFER;
         }
     }
@@ -86,6 +106,7 @@ void GameManager::update(float dt, sf::Vector2u windowSize)
     _paddle->update(dt);
     _ball->update(dt);
     _powerupManager->update(dt);
+    _cam->update(dt);
 }
 
 void GameManager::loseLife()
@@ -93,7 +114,8 @@ void GameManager::loseLife()
     _lives--;
     _ui->lifeLost(_lives);
 
-    // TODO screen shake.
+    //screen shake.
+    _cam->shake(_shakeStrengthVec[_lives], 1200);
 }
 
 void GameManager::render()
@@ -103,6 +125,7 @@ void GameManager::render()
     _brickManager->render();
     _powerupManager->render();
     _window->draw(_masterText);
+    _window->draw(_retryText);
     _ui->render();
 }
 

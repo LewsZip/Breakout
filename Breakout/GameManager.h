@@ -8,13 +8,17 @@
 #include "MessagingSystem.h"
 #include "UI.h"
 
+#include "Camera.h"
+#include <utility>
+#include <ctime>
+#include <iostream>
 
 
 class GameManager {
 public:
     GameManager(sf::RenderWindow* window);
     void initialize();
-    void update(float dt, sf::Vector2u windowSize);
+    void update(float dt);
     void loseLife();
     void render();
     void levelComplete();
@@ -35,10 +39,18 @@ private:
     int _lives;
     bool _levelComplete;
     int _currentLevel;
+
+    std::vector<float> _shakeStrengthVec = {
+        {0.9},
+        {0.5},
+        {0.25}
+    };
+
     std::pair<POWERUPS, float> _powerupInEffect;
 
     sf::Font _font;
     sf::Text _masterText;
+    sf::Text _retryText;
 
     sf::RenderWindow* _window;
     Paddle* _paddle;
@@ -47,6 +59,7 @@ private:
     PowerupManager* _powerupManager;
     MessagingSystem* _messagingSystem;
     UI* _ui;
+    Camera* _cam;
 
     static constexpr float PAUSE_TIME_BUFFER = 0.5f;
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn

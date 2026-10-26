@@ -23,7 +23,7 @@ int main()
 
         deltaTime = clock.restart().asSeconds();
 
-        gameManager.update(deltaTime,window.getSize());
+        gameManager.update(deltaTime);
 
         window.clear();
         gameManager.render();

@@ -1,10 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <utility>
+#include <iostream>
 
 class GameManager;  // forward declaration
-
-
 
 class Ball {
 public:
@@ -14,6 +13,14 @@ public:
     void render();
     void setVelocity(float coeff, float duration);
     void setFireBall(float duration);
+    void randomSpawn(sf::CircleShape &_sprite);
+
+    //a vector of pairs that contains ball spawn details (x pos, direction)
+    std::vector<std::pair<float, float>> spawnVec = {
+        {0, 1},
+        {500, 0},
+        {1000, 1}
+    };
 
 private:
     sf::CircleShape _sprite;

@@ -7,7 +7,8 @@ Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
 {
     _sprite.setRadius(RADIUS);
     _sprite.setFillColor(sf::Color::Cyan);
-    _sprite.setPosition(0, 300);
+    //_sprite.setPosition(1000, 300);
+    randomSpawn(_sprite);
 }
 
 Ball::~Ball()
@@ -113,4 +114,15 @@ void Ball::setFireBall(float duration)
     }
     _isFireBall = false;
     _timeWithPowerupEffect = 0.f;    
+}
+
+void Ball::randomSpawn(sf::CircleShape &_sprite) {
+    int randSpawn = rand() % 3;
+
+    _sprite.setPosition(spawnVec[randSpawn].first, 300);
+    _direction.x = { spawnVec[randSpawn].second };
+    
+    std::cout << "X Coord: " << spawnVec[randSpawn].first << "\n";
+    std::cout << "X Dir: " << spawnVec[randSpawn].second << "\n";
+    std::cout << "Random Number: " << randSpawn << "\n";
 }

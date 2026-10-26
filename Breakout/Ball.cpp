@@ -7,8 +7,8 @@ Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
 {
     _sprite.setRadius(RADIUS);
     _sprite.setFillColor(sf::Color::Cyan);
-    //_sprite.setPosition(1000, 300);
-    randomSpawn(_sprite);
+    
+    randomSpawn(_sprite); //sets up spawn values that we want to be random
 }
 
 Ball::~Ball()
@@ -117,11 +117,14 @@ void Ball::setFireBall(float duration)
 }
 
 void Ball::randomSpawn(sf::CircleShape &_sprite) {
-    int randSpawn = rand() % 3;
+    srand(time(0)); //setting seed value to get random vals each time game is run
+    int randSpawn = (rand() % 3); //getting a random value between 0 and 3
 
+    //setting position and direction of the ball based off of random spawnVec values
     _sprite.setPosition(spawnVec[randSpawn].first, 300);
     _direction.x = { spawnVec[randSpawn].second };
     
+    //debuggin
     std::cout << "X Coord: " << spawnVec[randSpawn].first << "\n";
     std::cout << "X Dir: " << spawnVec[randSpawn].second << "\n";
     std::cout << "Random Number: " << randSpawn << "\n";

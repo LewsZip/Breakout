@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <utility>
+#include <ctime>
 #include <iostream>
 
 class GameManager;  // forward declaration

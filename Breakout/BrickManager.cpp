@@ -6,8 +6,10 @@ BrickManager::BrickManager(sf::RenderWindow* window, GameManager* gameManager)
 {
 }
 
-void BrickManager::createBricks(int rows, int cols, float brickWidth, float brickHeight, float spacing)
+void BrickManager::createBricks(int rows, int cols, float brickWidth, float brickHeight, float spacing, int level)
 {
+
+
     float leftEdge;
     if (cols % 2 == 0) 
         leftEdge = _window->getSize().x / 2 - ((cols / 2.0f) * brickWidth + (cols / 2.0f - 0.5f) * spacing);

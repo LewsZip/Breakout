@@ -18,6 +18,11 @@ GameManager::GameManager(sf::RenderWindow* window)
     _retryText.setPosition(50, 500);
     _retryText.setCharacterSize(48);
     _retryText.setFillColor(sf::Color::Yellow);
+
+    _levelText.setFont(_font);
+    _levelText.setPosition(10, 100);
+    _levelText.setCharacterSize(48);
+    _levelText.setFillColor(sf::Color::Yellow);
 }
 
 void GameManager::initialize()
@@ -31,9 +36,7 @@ void GameManager::initialize()
     _cam = new Camera(_window);
 
     // Create bricks
-    _brickManager->createBricks(5, 10, 80.0f, 30.0f, 5.0f);
-
-    
+    _brickManager->createBricks(_brickRows[_currentLevel], _brickCols[_currentLevel], _brickWidth[_currentLevel], _brickHeight[_currentLevel], _brickSpacing[_currentLevel], _currentLevel);
 }
 
 void GameManager::update(float dt)
@@ -41,7 +44,7 @@ void GameManager::update(float dt)
     _powerupInEffect = _powerupManager->getPowerupInEffect();
     _ui->updatePowerupText(_powerupInEffect);
     _powerupInEffect.second -= dt;
-    
+    _retryText.setString(std::to_string(_currentLevel + 1));
 
     if (_lives <= 0)
     {
@@ -132,6 +135,8 @@ void GameManager::render()
 void GameManager::levelComplete()
 {
     _levelComplete = true;
+    _currentLevel += 1;
+    initialize();
 }
 
 sf::RenderWindow* GameManager::getWindow() const { return _window; }

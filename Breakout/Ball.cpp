@@ -9,6 +9,7 @@ Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
     _sprite.setFillColor(sf::Color::Cyan);
     
     randomSpawn(_sprite); //sets up spawn values that we want to be random
+    _window->setKeyRepeatEnabled(false);
 }
 
 Ball::~Ball()
@@ -17,7 +18,12 @@ Ball::~Ball()
 
 void Ball::update(float dt)
 {
-    
+ 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        // timer for parry window.
+        _timeHeld += dt;
+    }
+
     // check for powerup, tick down or correct
     if (_timeWithPowerupEffect > 0.f)
     {
@@ -81,12 +87,26 @@ void Ball::update(float dt)
         _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
     }
 
+    
     // collision with parry window
     if (_sprite.getGlobalBounds().intersects(_gameManager->getParry()->getBounds())) 
-    {
+    {   
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            _direction.y *= -1; // Bounce vertically
+            if (_timeHeld > 0.1) {
+                
+            }
+            else {
+                _direction.y *= -1; // Bounce vertically
+
+                _sprite.setPosition(_sprite.getPosition().x, _gameManager->getParry()->getBounds().top - 2 * RADIUS);
+            }
         }
+    }
+
+    // reset parry window if space is not being pressed
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        _timeHeld = 0;
     }
 
     // collision with bricks

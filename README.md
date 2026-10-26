@@ -32,11 +32,11 @@ You are to spend between three and eight hours improving this simple Breakout im
 
 ## Time Details and Changelist
 
-*Multiple Spawn Positions - ~40 Minutes (only took this long as I was still reading through the code)
-*Arrow Key Controls - ~10 Minutes
-*Camera + Screen Shake - ~30 Minutes
-*Levels - WIP (~30 mins so far)
-*Paddle "Sprint" - ~5 Minutes (this is in relation to holding lshift and speeding up the paddle)
+* Multiple Spawn Positions - ~40 Minutes (only took this long as I was still reading through the code)
+* Arrow Key Controls - ~10 Minutes
+* Camera + Screen Shake - ~30 Minutes
+* Levels - WIP (~30 mins so far)
+* Paddle "Sprint" - ~5 Minutes (this is in relation to holding lshift and speeding up the paddle)
 
 Total (so far) - ~ 1HR 55Mins
 

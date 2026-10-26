@@ -97,8 +97,8 @@ void Ball::update(float dt)
             }
             else {
                 _direction.y *= -1; // Bounce vertically
-
                 _sprite.setPosition(_sprite.getPosition().x, _gameManager->getParry()->getBounds().top - 2 * RADIUS);
+                setVelocity(2, 3);
             }
         }
     }

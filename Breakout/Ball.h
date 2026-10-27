@@ -15,10 +15,12 @@ public:
     void setVelocity(float coeff, float duration);
     void setFireBall(float duration);
     void randomSpawn(sf::CircleShape &_sprite);
+    sf::FloatRect getBounds() const;
     sf::Vector2u windowSize;
 
 private:
     sf::CircleShape _sprite;
+    sf::Texture _ballTexture;
     sf::Vector2f _direction;
     sf::RenderWindow* _window;
     float _velocity;
@@ -26,6 +28,7 @@ private:
     bool _isFireBall;
     float _timeWithPowerupEffect;
     float _timeHeld;
+    float _timeShown;
 
     GameManager* _gameManager;  // Reference to the GameManager
 

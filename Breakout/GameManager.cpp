@@ -9,6 +9,14 @@ GameManager::GameManager(sf::RenderWindow* window)
     _powerupInEffect({ none,0.f }), _timeLastPowerupSpawned(0.f), _cam(nullptr), _parry(nullptr)
 {
     _font.loadFromFile("font/montS.ttf");
+
+    _bgTexture.loadFromFile("textures/bgfull.png");
+    _bgTexture.setRepeated(true);
+
+    _background.setTexture(&_bgTexture);
+    _background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
+    _background.setPosition(0, 0);
+
     _masterText.setFont(_font);
     _masterText.setPosition(50, 400);
     _masterText.setCharacterSize(48);
@@ -20,7 +28,7 @@ GameManager::GameManager(sf::RenderWindow* window)
     _retryText.setFillColor(sf::Color::Yellow);
 
     _levelText.setFont(_font);
-    _levelText.setPosition(10, 100);
+    _levelText.setPosition(window->getSize().x - 200, 25);
     _levelText.setCharacterSize(48);
     _levelText.setFillColor(sf::Color::Yellow);
 }
@@ -45,7 +53,7 @@ void GameManager::update(float dt)
     _powerupInEffect = _powerupManager->getPowerupInEffect();
     _ui->updatePowerupText(_powerupInEffect);
     _powerupInEffect.second -= dt;
-    _retryText.setString(std::to_string(_currentLevel + 1));
+    _levelText.setString("Level: " + std::to_string(_currentLevel + 1));
 
     if (_lives <= 0)
     {
@@ -126,6 +134,7 @@ void GameManager::loseLife()
 
 void GameManager::render()
 {
+    _window->draw(_background);
     _paddle->render();
     _ball->render();
     _brickManager->render();

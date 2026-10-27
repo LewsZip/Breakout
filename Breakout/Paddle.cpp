@@ -4,8 +4,10 @@
 Paddle::Paddle(sf::RenderWindow* window)
     : _window(window), _width(PADDLE_WIDTH), _timeInNewSize(0.0f), _isAlive(true)
 {
-    _sprite.setFillColor(sf::Color::Cyan);
-    _sprite.setPosition((window->getSize().x - _width) / 2.0f, window->getSize().y - 50.0f);
+    _paddleTex.loadFromFile("textures/paddle.png");
+
+    _sprite.setTexture(&_paddleTex);
+    _sprite.setPosition((window->getSize().x - _width) / 2.0f, window->getSize().y - 75.0f);
     _sprite.setSize(sf::Vector2f(_width, PADDLE_HEIGHT));
 }
 

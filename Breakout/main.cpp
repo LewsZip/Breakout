@@ -5,7 +5,7 @@
 int main()
 {
 
-    sf::RenderWindow window(sf::VideoMode(1000, 800), "Breakout");
+    sf::RenderWindow window(sf::VideoMode(1000, 800), "Cooler Breakout");
     GameManager gameManager(&window);
     gameManager.initialize();
 
@@ -24,8 +24,8 @@ int main()
         deltaTime = clock.restart().asSeconds();
 
         gameManager.update(deltaTime);
-
         window.clear();
+        
         gameManager.render();
         window.display();
     }

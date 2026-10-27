@@ -11,7 +11,7 @@ UI::UI(sf::RenderWindow* window, int lives, GameManager* gameManager)
 	{
 		sf::CircleShape newLife;
 		newLife.setFillColor(sf::Color::Red);	
-		newLife.setOutlineColor(sf::Color::Cyan);
+		newLife.setOutlineColor(sf::Color::White);
 		newLife.setOutlineThickness(4.0f);
 		newLife.setRadius(LIFE_RADIUS);
 		newLife.setPosition((LIFE_RADIUS*2 + LIFE_PADDING) * i, LIFE_PADDING);
@@ -22,6 +22,12 @@ UI::UI(sf::RenderWindow* window, int lives, GameManager* gameManager)
 	_powerupText.setFillColor(sf::Color::Cyan);
 	_font.loadFromFile("font/montS.ttf");
 	_powerupText.setFont(_font);
+
+	_bannerTexture.loadFromFile("textures/banner.png");
+
+	_bannerShape.setTexture(&_bannerTexture);
+	_bannerShape.setSize(sf::Vector2f(175,100));
+	_bannerShape.setPosition(25, -15);
 }
 
 UI::~UI()
@@ -37,27 +43,27 @@ void UI::updatePowerupText(std::pair<POWERUPS, float> powerup)
 	{
 	case bigPaddle:
 		oss << std::fixed << std::setprecision(2) << powerup.second;
-		_powerupText.setString("big " + oss.str());
+		_powerupText.setString("Big! " + oss.str());
 		_powerupText.setFillColor(paddleEffectsColour);
 		break;
 	case smallPaddle:
 		oss << std::fixed << std::setprecision(2) << powerup.second;
-		_powerupText.setString("small " + oss.str());
+		_powerupText.setString("Small! " + oss.str());
 		_powerupText.setFillColor(paddleEffectsColour);
 		break;
 	case slowBall:
 		oss << std::fixed << std::setprecision(2) << powerup.second;
-		_powerupText.setString("slow " + oss.str());
+		_powerupText.setString("Slow! " + oss.str());
 		_powerupText.setFillColor(ballEffectsColour);
 		break;
 	case fastBall:
 		oss << std::fixed << std::setprecision(2) << powerup.second;
-		_powerupText.setString("fast " + oss.str());
+		_powerupText.setString("Fast! " + oss.str());
 		_powerupText.setFillColor(ballEffectsColour);
 		break;
 	case fireBall:
 		oss << std::fixed << std::setprecision(2) << powerup.second;
-		_powerupText.setString("fire " + oss.str());
+		_powerupText.setString("Fire! " + oss.str());
 		_powerupText.setFillColor(extraBallEffectsColour);
 		break;
 	case none:
@@ -74,6 +80,7 @@ void UI::lifeLost(int lives)
 
 void UI::render()
 {
+	_window->draw(_bannerShape);
 	_window->draw(_powerupText);
 	for (sf::CircleShape life : _lives)
 	{

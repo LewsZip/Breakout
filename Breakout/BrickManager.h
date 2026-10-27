@@ -11,10 +11,12 @@ public:
     void createBricks(int rows, int cols, float brickWidth, float brickHeight, float spacing, int level);
     void render();
     int checkCollision(sf::CircleShape& ball, sf::Vector2f& direction);
+    void update(float dt);
 
 private:
     std::vector<Brick> _bricks;
     sf::RenderWindow* _window;
+    sf::Texture _brickTexture;
 
     GameManager* _gameManager;
     static constexpr float TOP_PADDING = 100.0f;

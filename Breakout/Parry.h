@@ -17,7 +17,7 @@ public:
 private:
 
     sf::RenderWindow* _window;
-    sf::RectangleShape _sprite;
+    sf::RectangleShape _ParrySprite;
     float _width;
 };
 

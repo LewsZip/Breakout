@@ -27,6 +27,7 @@ public:
 
     Paddle* getPaddle() const;
     Parry* getParry() const;
+    Ball* getBall() const;
     BrickManager* getBrickManager() const;
     PowerupManager* getPowerupManager() const;
     sf::RenderWindow* getWindow() const;
@@ -54,6 +55,8 @@ private:
     sf::Text _masterText;
     sf::Text _retryText;
     sf::Text _levelText;
+    sf::RectangleShape _background;
+    sf::Texture _bgTexture;
 
     sf::RenderWindow* _window;
     Paddle* _paddle;
@@ -69,9 +72,9 @@ private:
     static constexpr float POWERUP_FREQUENCY = 7.5f;    // time between minimum powerup spawn
 
     //(int rows, int cols, float brickWidth, float brickHeight, float spacing, int level); 5, 10, 80.0f, 30.0f, 5.0f
-    float _brickRows[3] = {4, 4, 8};
-    float _brickCols[3] = {4, 8, 16};
-    float _brickWidth[3] = {50.f, 40.f, 40.f};
-    float _brickHeight[3] = {50.f,15.f,15.f};
-    float _brickSpacing[3] = { 30.0f,5.0f,5.0f };
+    float _brickRows[3] = {4, 6, 2};
+    float _brickCols[3] = {8, 8, 3};
+    float _brickWidth[3] = {87.f, 60.f, 40.f};
+    float _brickHeight[3] = {27.f,18.f,15.f};
+    float _brickSpacing[3] = { 15.0f,20.0f,40.0f };
 };

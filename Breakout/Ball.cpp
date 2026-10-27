@@ -5,8 +5,11 @@ Ball::Ball(sf::RenderWindow* window, float velocity, GameManager* gameManager)
     : _window(window), _velocity(velocity), _gameManager(gameManager),
     _timeWithPowerupEffect(0.f), _isFireBall(false), _isAlive(true), _direction({1,1})
 {
+    _ballTexture.loadFromFile("textures/ball.png");
+
     _sprite.setRadius(RADIUS);
-    _sprite.setFillColor(sf::Color::Cyan);
+    _sprite.setTexture(&_ballTexture);
+    _sprite.setFillColor(sf::Color::White);
     
     randomSpawn(_sprite); //sets up spawn values that we want to be random
     _window->setKeyRepeatEnabled(false);
@@ -36,7 +39,7 @@ void Ball::update(float dt)
         else
         {
             setFireBall(0);    // disable fireball
-            _sprite.setFillColor(sf::Color::Cyan);  // back to normal colour.
+            _sprite.setFillColor(sf::Color::White);  // back to normal colour.
         }        
     }
 
@@ -99,6 +102,8 @@ void Ball::update(float dt)
                 _direction.y *= -1; // Bounce vertically
                 _sprite.setPosition(_sprite.getPosition().x, _gameManager->getParry()->getBounds().top - 2 * RADIUS);
                 setVelocity(2, 3);
+                _timeShown += dt;
+
             }
         }
     }
@@ -165,4 +170,9 @@ void Ball::randomSpawn(sf::CircleShape &_sprite) {
     std::cout << "X Coord: " << spawnVec[randSpawn].first << "\n";
     std::cout << "X Dir: " << spawnVec[randSpawn].second << "\n";
     std::cout << "Random Number: " << randSpawn << "\n";
+}
+
+sf::FloatRect Ball::getBounds() const
+{
+    return _sprite.getGlobalBounds();
 }

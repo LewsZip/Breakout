@@ -90,19 +90,27 @@ void Ball::update(float dt)
         _sprite.setPosition(_sprite.getPosition().x, _gameManager->getPaddle()->getBounds().top - 2 * RADIUS);
     }
 
-    
+    if (_justParried) {
+        _parryTimer += dt;
+        if (_parryTimer > 3) {
+            _justParried = false;
+            _parrymult = 1;
+        }
+    }
+
     // collision with parry window
     if (_sprite.getGlobalBounds().intersects(_gameManager->getParry()->getBounds())) 
     {   
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            _justParried = true;
+            _parrymult += 1;
             if (_timeHeld > 0.1) {
                 
             }
             else {
-                _direction.y *= -1; // Bounce vertically
+                (_direction.y *= -1); // Bounce vertically
                 _sprite.setPosition(_sprite.getPosition().x, _gameManager->getParry()->getBounds().top - 2 * RADIUS);
-                setVelocity(2, 3);
-                _timeShown += dt;
+                setVelocity(_parrymult, 3);
 
             }
         }

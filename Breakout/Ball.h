@@ -26,9 +26,11 @@ private:
     float _velocity;
     bool _isAlive;
     bool _isFireBall;
+    bool _justParried;
     float _timeWithPowerupEffect;
     float _timeHeld;
-    float _timeShown;
+    float _parryTimer;
+    float _parrymult = 1;
 
     GameManager* _gameManager;  // Reference to the GameManager
 

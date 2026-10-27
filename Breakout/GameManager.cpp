@@ -61,6 +61,7 @@ void GameManager::update(float dt)
         _retryText.setString("Press 'R' to restart.");
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+            _lifeLost = false;
             _pause = false;
             _lives = 3;
             _currentLevel = 0;
@@ -104,6 +105,13 @@ void GameManager::update(float dt)
     // timer.
     _time += dt;
 
+    if (_lifeLost)
+    {
+        //screen shake.
+        _cam->shake(_shakeStrengthVec[_lives], 1200);
+        _lifeLost = false;
+    }
+
 
     if (_time > _timeLastPowerupSpawned + POWERUP_FREQUENCY && rand()%700 == 0)      // TODO parameterise
     {
@@ -127,9 +135,7 @@ void GameManager::loseLife()
 {
     _lives--;
     _ui->lifeLost(_lives);
-
-    //screen shake.
-    _cam->shake(_shakeStrengthVec[_lives], 1200);
+    _lifeLost = true;
 }
 
 void GameManager::render()

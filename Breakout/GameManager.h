@@ -41,6 +41,7 @@ private:
     float _timeLastPowerupSpawned;
     int _lives;
     bool _levelComplete;
+    bool _lifeLost;
     int _currentLevel = 0;
 
     std::vector<float> _shakeStrengthVec = {

@@ -76,6 +76,8 @@ void Ball::update(float dt)
         _sprite.setPosition(500, 300);
         _direction = { 0, 1 };
         _gameManager->loseLife();
+        _parrymult = 1;
+        setVelocity(_parrymult, 3);
     }
 
     // collision with paddle
@@ -104,6 +106,7 @@ void Ball::update(float dt)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             _justParried = true;
             _parrymult += 1;
+            _parryTimer = 0;
             if (_timeHeld > 0.1) {
                 
             }
@@ -111,7 +114,6 @@ void Ball::update(float dt)
                 (_direction.y *= -1); // Bounce vertically
                 _sprite.setPosition(_sprite.getPosition().x, _gameManager->getParry()->getBounds().top - 2 * RADIUS);
                 setVelocity(_parrymult, 3);
-
             }
         }
     }

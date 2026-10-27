@@ -7,6 +7,7 @@
 UI::UI(sf::RenderWindow* window, int lives, GameManager* gameManager) 
 	: _window(window), _gameManager(gameManager)
 {
+
 	for (int i = lives; i > 0; --i)
 	{
 		sf::CircleShape newLife;

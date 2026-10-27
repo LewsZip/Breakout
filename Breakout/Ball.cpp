@@ -77,6 +77,7 @@ void Ball::update(float dt)
         _direction = { 0, 1 };
         _gameManager->loseLife();
         _parrymult = 1;
+        _parryhits = 0;
         setVelocity(_parrymult, 3);
     }
 
@@ -97,6 +98,7 @@ void Ball::update(float dt)
         if (_parryTimer > 3) {
             _justParried = false;
             _parrymult = 1;
+            _parryhits = 0;
         }
     }
 
@@ -107,6 +109,7 @@ void Ball::update(float dt)
             _justParried = true;
             _parrymult += 1;
             _parryTimer = 0;
+            _parryhits += 1;
             if (_timeHeld > 0.1) {
                 
             }
@@ -114,6 +117,9 @@ void Ball::update(float dt)
                 (_direction.y *= -1); // Bounce vertically
                 _sprite.setPosition(_sprite.getPosition().x, _gameManager->getParry()->getBounds().top - 2 * RADIUS);
                 setVelocity(_parrymult, 3);
+                if (_parryhits > 3) {
+                    setFireBall(5);
+                }
             }
         }
     }

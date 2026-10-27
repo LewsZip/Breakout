@@ -31,6 +31,7 @@ private:
     float _timeHeld;
     float _parryTimer;
     float _parrymult = 1;
+    float _parryhits = 0;
 
     GameManager* _gameManager;  // Reference to the GameManager
 

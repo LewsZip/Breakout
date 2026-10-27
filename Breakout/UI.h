@@ -13,6 +13,7 @@ public:
 	UI(sf::RenderWindow* window, int lives, GameManager* gameManager);
 	~UI();
 
+
 	void updatePowerupText(std::pair<POWERUPS, float>);
 	void lifeLost(int lives);
 	void render();
@@ -27,9 +28,10 @@ private:
 	sf::Texture _bannerTexture;
 	sf::RectangleShape _bannerShape;
 
+	
+
 	std::vector<sf::CircleShape> _lives;
 
 	static constexpr float LIFE_RADIUS = 15.0f;
 	static constexpr float LIFE_PADDING = 20.0f;
 };
-

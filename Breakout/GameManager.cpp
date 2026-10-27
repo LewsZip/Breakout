@@ -154,6 +154,7 @@ void GameManager::render()
 void GameManager::levelComplete()
 {
     _currentLevel += 1;
+    _lives += 1;
     initialize();
 }
 
